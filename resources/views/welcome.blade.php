@@ -12,7 +12,10 @@
 
 <body class="antialiased">
     <div class="flex justify-center items-center h-screen">
-        <h1 class="text-3xl text-purple-600 font-bold">Laravel 9 Vite with Tailwind CSS</h1>
+        <h1 class="text-3xl text-purple-600 font-bold">TRAINS</h1>
+        <pre>
+            @dd($trains)
+        </pre>
     </div>
 </body>
 
