@@ -14,8 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('trains', function (Blueprint $table) {
-            $table->dropColumn('cancellato');
-            $table->tinyInteger('binario');
+            $table->string('codice_treno', 5)->change();
         });
     }
 
@@ -27,8 +26,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('trains', function (Blueprint $table) {
-            $table->dropColumn('binario');
-            $table->boolean('cancellato');
+            //
         });
     }
 };
