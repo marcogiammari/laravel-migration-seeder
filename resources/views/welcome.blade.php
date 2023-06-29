@@ -13,15 +13,16 @@
 <body class="antialiased bg-slate-700">
     <div class="flex flex-col justify-center items-center h-screen">
         <h1 class="text-3xl text-gray-300 font-bold p-2">PARTENZE</h1>
-        <table class="bg-slate-900">
+        <table class="bg-slate-900 border-4 border-slate-500">
             <thead>
                 <tr class="text-yellow-400 text-left">
                     <th scope="col" colspan="2">Treno</th>
                     <th scope="col">Destinazione</th>
                     <th scope="col">Orario</th>
                     <th scope="col">In orario</th>
-                    <th scope="col">Cancellato</th>
                     <th scope="col">Carrozze</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Binario</th>
                 </tr>
             </thead>
             <tbody>
@@ -30,7 +31,7 @@
                         <td>{{ ucfirst($train->azienda) }}</td>
                         <td>{{ $train->codice_treno }}</td>
                         <td>{{ ucfirst($train->stazione_di_arrivo) }}</td>
-                        <td>{{ $train->orario_di_partenza }}</td>
+                        <td>{{ substr($train->orario_di_partenza, 11, -3) }}</td>
                         <td>
                             @if ($train->in_orario == 1)
                                 Sì
@@ -38,14 +39,9 @@
                                 No
                             @endif
                         </td>
-                        <td>
-                            @if ($train->cancellato == 1)
-                                Sì
-                            @else
-                                No
-                            @endif
-                        </td>
                         <td>{{ $train->numero_carrozze }}</td>
+                        <td>{{ $train->tipo_treno }}</td>
+                        <td>{{ $train->binario }}</td>
                     </tr>
                 @endforeach
             </tbody>
