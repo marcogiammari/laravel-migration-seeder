@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Guest\PageController as PageController;
-use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
