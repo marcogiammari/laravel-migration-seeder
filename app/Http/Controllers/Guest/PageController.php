@@ -8,11 +8,19 @@ use App\Models\Train;
 
 class PageController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        // $trains = Train::all();
-        $trains = Train::select('azienda', 'codice_treno', 'stazione_di_arrivo', 'orario_di_partenza', 'in_orario', 'numero_carrozze', 'binario')->orderBy('orario_di_partenza', 'ASC')->get();
+        // setta il fuso orario
+        date_default_timezone_set('Europe/Rome');
+        // formatta il timestamp corrente in ore, minuti, secondi
+        $time = date('h:i:s', time());
 
-        return view('welcome', compact('trains'));
+        // recupera i nomi delle aziende da config/seeder.php
+        $companies = config('seeder.companies');
+
+        // seleziona massimo dieci treni, in ordine di orario di partenza, che hanno un orario di partenza posteriore alla variabile $time 
+        $trains = Train::select('azienda_id', 'codice_treno', 'stazione_di_arrivo', 'orario_di_partenza', 'ritardo', 'numero_carrozze', 'binario')->where('orario_di_partenza', '>', $time)->orderBy('orario_di_partenza', 'ASC')->limit(10)->get();
+
+        return view('welcome', compact('trains', 'companies'));
     }
 }
